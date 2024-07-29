@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="/profile.css">
+    <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
+    
+</head>
+
+<body>
+    <div class="profile-container">
+        <nav class="navbar">
+            <!-- <div class="navbar-left">
+                <i class="bi bi-house"></i>
+                <a class="home-btn" href="/admin">Home</a>
+            </div> -->
+            <div class="navbar-right">
+                <img src="/image/profile.png" alt="Profile Picture" class="profile-pic-navbar">
+                <a href="/logout" class="logout-btn">Logout</a>
+            </div>
+        </nav>
+        <div class="profile-header">
+            <img src="/image/profile.png" alt="Profile Picture" class="profile-pic">
+            <h1 class="profile-name"><%= user.username %></h1>
+        </div>
+        <div class="profile-body">
+            <div class="profile-info">
+                <h2>Profile Information</h2>
+                <p><strong>User Id:</strong> <%= user._id %></p>
+                <p><strong>Username:</strong> <%= user.username %></p>
+                <p><strong>Email:</strong> <%= user.email %></p>
+                <p><strong>Contact:</strong> <%= user.contact %></p>
+                <p><strong>Admin Status:</strong> <%= user.isAdmin %></p>
+                <p><strong>Password:</strong> <%= user.password %></p>
+                <!-- Add other fields as needed -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

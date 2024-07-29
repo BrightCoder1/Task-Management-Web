@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
+    <link rel="stylesheet" href="register.css">
+    <script>
+        function validateInputLength(input) {
+            if (input.value.length !== 10) {
+                alert("Contact number must be exactly 10 digits.");
+                input.value = ""; // Clear the input field
+            }
+        }
+
+        function validatePasswordLength(input) {
+            if (input.value.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                input.value = ""; // Clear the input field
+            }
+        }
+
+        function validateForm() {
+            var contactNumber = document.getElementById("contact").value;
+            var password = document.getElementById("password").value;
+
+            if (contactNumber.length !== 10) {
+                alert("Contact number must be exactly 10 digits.");
+                return false; // Prevent form submission
+            }
+
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return false; // Prevent form submission
+            }
+
+            return true; // Allow form submission
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="image-container">
+            <img src="/image/checklist.jpg" alt="Register Image">
+        </div>
+        <div class="register-container">
+            <form class="register-form" method="post" action="/register" onsubmit="return validateForm()">
+                <img src="/image/logo.jpeg" alt="Logo" class="logo">
+                <h2>Register</h2>
+                <div class="input-container">
+                    <input type="text" id="fullname" class="input-field" placeholder=" " name="username" required>
+                    <label for="fullname" class="input-label">Full Name</label>
+                </div>
+                <div class="input-container">
+                    <input type="email" id="email" class="input-field" placeholder=" " name="email" required>
+                    <label for="email" class="input-label">Email Address</label>
+                </div>
+                
+                <div class="input-container">
+                    <input type="date" id="email" class="input-field" placeholder=" " name="birthday" required>
+                    <label for="email" class="input-label">Birthday</label>
+                </div>
+
+                <div class="input-container">
+                    <input type="text" id="email" class="input-field" placeholder=" " name="address" required>
+                    <label for="email" class="input-label">Address</label>
+                </div>
+
+                <div class="input-container">
+                    <input type="text" id="email" class="input-field" placeholder=" " name="accountnum" required>
+                    <label for="email" class="input-label">Account Number</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="contact" class="input-field" placeholder=" " name="contact" maxlength="10"
+                        onblur="validateInputLength(this)" required>
+                    <label for="contact" class="input-label">Contact</label>
+                </div>
+                <div class="input-container">
+                    <input type="password" id="password" class="input-field" placeholder=" " name="password"
+                        onblur="validatePasswordLength(this)" required>
+                    <label for="password" class="input-label">Password</label>
+                </div>
+                <div class="input-container">
+                    <input type="password" id="Confirmpassword" class="input-field" placeholder=" " name="cpassword"
+                        required>
+                    <label for="Confirmpassword" class="input-label">Confirm Password</label>
+                </div>
+                <button type="submit">Register</button>
+                <p class="login-link">Already have an account? <a href="/login">Login</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

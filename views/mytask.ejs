@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="Tooplate">
+
+    <title>Task Management</title>
+    <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
+    
+    <link rel="stylesheet" href="/css/index.css">
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="/https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="/https://fonts.gstatic.com" crossorigin>
+
+    <link href="/https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="/css/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="/css/apexcharts.css" rel="stylesheet">
+
+    <link href="/css/tooplate-mini-finance.css" rel="stylesheet">
+    <!--
+
+Tooplate 2135 Mini Finance
+
+https://www.tooplate.com/view/2135-mini-finance
+
+Bootstrap 5 Dashboard Admin Template
+
+-->
+</head>
+
+<body>
+    <header class="navbar sticky-top flex-md-nowrap">
+        <div class="col-md-3 col-lg-3 me-0 px-3 fs-6">
+            <p class="navbar-brand">
+                <i class="bi-box"></i>
+                Task Management
+            </p>
+        </div>
+
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- <form class="custom-form header-form ms-lg-3 ms-md-3 me-lg-auto me-md-auto order-2 order-lg-0 order-md-0"
+            action="#" method="get" role="form">
+            <input class="form-control" name="search" type="text" placeholder="Search" aria-label="Search">
+        </form> -->
+
+        <div class="navbar-nav me-lg-2">
+            <div class="nav-item text-nowrap d-flex align-items-center">
+
+                <div class="dropdown px-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <img src="/images/medium-shot-happy-man-smiling.jpg" class="profile-image img-fluid" alt="">
+                    </a>
+                    <ul class="dropdown-menu bg-white shadow">
+                        <li>
+                            <div class="dropdown-menu-profile-thumb d-flex">
+                                <img src="/images/medium-shot-happy-man-smiling.jpg"
+                                    class="profile-image img-fluid me-3" alt="">
+
+                                <div class="d-flex flex-column">
+                                    <small>
+                                        <%= user.username %>
+                                    </small>
+                                    <p style="font-size: 12px;">
+                                        <%= user.email %>
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="/profile/<%= user._id %>">
+                                <i class="bi-person me-2"></i>
+                                Profile
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a class="dropdown-item" href="/setting/<%= user._id %>">
+                                <i class="bi-gear me-2"></i>
+                                Settings
+                            </a>
+                        </li>
+
+                        <li class="border-top mt-3 pt-2 mx-4">
+                            <a class="dropdown-item ms-0 me-0" href="/logout">
+                                <i class="bi-box-arrow-left me-2"></i>
+                                Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main style="width: 100%;" class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
+        <div class="title-group mb-3">
+            <h1 class="h2 mb-0">Task Information Of : <%= user.username.toUpperCase()%></h1>
+        </div>
+
+        <div class="row my-4">
+            <div class="col-lg-12 col-12">
+                <div class="custom-block bg-white">
+                    <h5 class="mb-4">All Tasks</h5>
+
+                    <div class="table-responsive">
+                        <table class="account-table table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">S.No</th>
+
+
+                                    <th scope="col">Taskname</th>
+
+                                    <th scope="col">Description</th>
+
+                                    <th scope="col">Assigne Date</th>
+
+                                    <th scope="col">Target Date</th>
+
+                                    <th scope="col">TaskStatus</th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <% tasks.forEach(function(task,index){ %>
+                                    <tr>
+
+                                        <td scope="row">
+                                            <%= index+1 %>
+                                        </td>
+
+
+                                        <td scope="row"><%= task.taskName %></td>
+
+                                        <td scope="row"><%= task.taskDescription %></td>
+
+                                        <td scope="row"><%= new Date(task.assigneDate).toLocaleDateString() %></td>
+
+                                        <td scope="row"><%= new Date(task.targetDate).toLocaleDateString() %></td>
+
+                                        <td class="text-danger" scope="row">
+                                            <%= task.taskCompleted ? 'Completed' : 'Pending' %>
+                                        </td>
+
+                                    </tr>
+                                    <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/apexcharts.min.js"></script>
+    <script src="/js/custom.js"></script>
+</body>
+
+</html>

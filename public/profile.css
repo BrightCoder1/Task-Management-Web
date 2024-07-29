@@ -1,0 +1,130 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.profile-container {
+    width: 99%;
+    height: 98vh;
+    margin: 5px auto;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #007bff;
+    padding: 10px 20px;
+    color: white;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    position: absolute;
+    right: 10px;
+    background: #fff;
+    color: #007bff;
+}
+.profile-pic-navbar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 30px;
+}
+
+.logout-btn {
+    background-color: white;
+    /* Red color for logout button */
+    color: #007bff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-left: auto;
+    /* Pushes the button to the right */
+    text-decoration: none;
+    margin-right: 2rem;
+}
+
+.logout-btn:hover {
+    background-color: #ebeaea;
+    /* Darker red on hover */
+    text-decoration: none;
+}
+.profile-header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-name {
+    margin: 10px 0 5px 0;
+    font-size: 24px;
+}
+
+.profile-role {
+    margin: 0;
+    font-size: 18px;
+}
+
+.profile-body {
+    display: flex;
+    justify-content: center;  /* space-between for left*/
+    padding: 20px;
+}
+
+.profile-info, .profile-tasks {
+    width: 45%;
+}
+
+.profile-info h2, .profile-tasks h2 {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+.profile-info p {
+    margin: 10px 0;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+}
+
+.task-item {
+    background-color: #f9f9f9;
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+}
+
+
+/* <div class="profile-tasks">
+                <h2>My Tasks</h2>
+                <ul class="task-list">
+                    <li class="task-item"></li>
+                    <li class="task-item"></li>
+                    <li class="task-item"></li>
+                    <li class="task-item"></li>
+                    <li class="task-item"></li>
+                </ul>
+            </div> */

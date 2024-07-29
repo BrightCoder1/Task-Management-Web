@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assign Task</title>
+    <link rel="stylesheet" href="/task.css"> <!-- Link your CSS file -->
+    <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
+
+    <!-- Include FontAwesome from CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <a class="navbar-brand">Assign Task Dashboard</a>
+        <a href="/logout" class="logout-btn">Logout</a>
+        
+    </div>
+    <div class="container">
+        <header>
+            <h1>Assign Task to User</h1>
+        </header>
+        <main>
+            <form id="taskForm" action="/tasks/add" method="POST" class="task-form">
+                <input type="hidden" id="userId" name="userId" value="<%= user._id %>" readonly>
+                <div class="form-group">
+                    <label for="username">Email:</label>
+                    <input type="text" id="username" name="email" value="<%= user.email %>" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="taskName">Task:</label>
+                    <input type="text" id="taskName" name="taskName" required>
+                </div>
+                <div class="form-group">
+                    <label for="taskDescription">Comment:</label>
+                    <textarea id="taskDescription" name="taskDescription" rows="4" class="comment-box"
+                        placeholder="Enter your comment"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select id="priority" name="priority" required>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="assigneDate">Assign Date:</label>
+                    <input type="date" id="assigneDate" name="assigneDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="targetDate">Target Date:</label>
+                    <input type="date" id="targetDate" name="targetDate" required>
+                </div>
+                <div class="btn-container">
+                    <button type="submit" class="btn">Assign Task</button>
+                </div>
+            </form>
+
+            <!-- Task List Table -->
+            <div class="task-details">
+                <h2>Assigned Tasks</h2>
+                <table class="task-details-table">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Comment</th>
+                            <th>Priority</th>
+                            <th>Assign Date</th>
+                            <th>Target Date</th>
+                            <th>Task Status</th>
+                            <th>Edit Task</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% tasks.forEach(function(task) { %>
+                            <tr>
+                                <td>
+                                    <%= task.taskName %>
+                                </td>
+                                <td>
+                                    <%= task.taskDescription %>
+                                </td>
+                                <td class="<%= task.priority %>-priority">
+                                    <%= task.priority.charAt(0).toUpperCase() + task.priority.slice(1) %>
+                                </td>
+                                <td>
+                                    <%= new Date(task.assigneDate).toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= new Date(task.targetDate).toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= task.taskCompleted ? 'Completed' : 'Pending' %>
+                                </td>
+                                <td>
+                                    Edit Task Now
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

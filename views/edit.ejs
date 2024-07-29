@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User</title>
+    <link rel="stylesheet" href="/register.css">
+    <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <div class="register-container">
+            <form class="register-form" action="/update/<%= user._id %>" method="post">
+                <img src="/image/logo.jpeg" alt="Logo" class="logo">
+                <h2>Update User</h2>
+                <div class="input-container">
+                    <input type="text" id="fullname" class="input-field" placeholder=" " name="username" value="<%= user.username %>">
+                    <label for="fullname" class="input-label">Full Name</label>
+                </div>
+                <div class="input-container">
+                    <input type="email" id="email" class="input-field" placeholder=" " name="email" value="<%= user.email %>">
+                    <label for="email" class="input-label">Email Address</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="contact" class="input-field" placeholder=" " name="contact" value="<%= user.contact %>">
+                    <label for="contact" class="input-label">Contact</label>
+                </div>
+                <div class="input-container">
+                    <input type="date" id="birthday" class="input-field" placeholder=" " name="birthday" value="<%= user.birthday %>">
+                    <label for="birthday" class="input-label">Birthday</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="address" class="input-field" placeholder=" " name="address" value="<%= user.address %>">
+                    <label for="address" class="input-label">Address</label>
+                </div>
+                <div class="form-group">
+                    <label for="isAdmin">Admin</label>
+                    <div class="admin">
+                        <label for="isAdminTrue">True</label>
+                        <input class="admin-input" type="radio" id="isAdminTrue" name="isAdmin" value="true" <%= user.isAdmin ? 'checked' : '' %>>
+                    </div>
+                    <div class="admin">
+                        <label for="isAdminFalse">False</label>
+                        <input class="admin-input" type="radio" id="isAdminFalse" name="isAdmin" value="false" <%= !user.isAdmin ? 'checked' : '' %>>
+                    </div>
+                </div>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

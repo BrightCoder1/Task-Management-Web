@@ -1,0 +1,11 @@
+.update {
+    border: 2px solid green;
+    padding: 2px 5px;
+    border-radius: 6px;
+    background: green;
+    color: #fff;
+}
+#red{
+    border:2px solid red;
+    background-color: red;
+}

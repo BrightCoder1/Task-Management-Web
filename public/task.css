@@ -1,0 +1,250 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 65px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.navbar {
+    background-color: #e63946; /* Navbar background color */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    position: fixed; /* Fixed position for navbar */
+    width: 100%;
+    z-index: 1000; /* Ensure navbar is above other content */
+    top: 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.user-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 2.0rem;
+    margin-right: 30px;
+}
+
+.user-btn:focus {
+    outline: none;
+}
+
+.fa-circle-user {
+    color: white;
+}
+.logout-btn {
+    background-color: white; /* Red color for logout button */
+    color: #e63946;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-left: auto; /* Pushes the button to the right */
+    text-decoration: none;
+    margin-right: 1rem;
+}
+
+.logout-btn:hover {
+    background-color: #ebeaea; /* Darker red on hover */
+}
+
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.task-form {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #e63946;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-btn {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.task-details {
+    margin-top: 20px;
+}
+
+.task-details-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.task-details-table th,
+.task-details-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.task-details-table th {
+    background-color: #e63946;
+    color: white;
+}
+.high-priority {
+    color: red;
+    font-weight: bold;
+    text-shadow: 0 0 5px red;
+}
+
+.medium-priority {
+    color: orange;
+    font-weight: bold;
+    text-shadow: 0 0 5px orange;
+}
+
+.low-priority {
+    color: green;
+    font-weight: bold;
+    text-shadow: 0 0 5px green;
+}
+
+/* Additional styles for your form and table */
+/* Style for edit and review buttons */
+.edit-btn,
+.review-btn {
+    padding: 8px 16px;
+    margin-right: 5px;
+    cursor: pointer;
+    background-color: #007bff; /* Blue color */
+    color: #fff; /* White text color */
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+.edit-btn:hover,
+.review-btn:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+/* Active/focus effect */
+.edit-btn:active,
+.review-btn:active {
+    background-color: #0056b3; /* Darker blue color when active */
+}
+
+/* Optional: Adjust margin or padding as needed */
+.edit-btn {
+    margin-right: 5px; /* Adjust margin for spacing */
+}
+
+.review-btn {
+    margin-right: 10px; /* Adjust margin for spacing */
+}
+.hidden {
+    display: none;
+}
+/* Responsive Design */
+@media screen and (max-width: 992px) {
+    .container {
+        max-width: 95%; /* Adjusted max-width for smaller screens */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .user-btn {
+        margin-right: 10px;
+        margin-bottom: 10px;
+    }
+
+    .navbar-brand {
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .task-details-table {
+        font-size: 14px; /* Decrease font size for smaller screens */
+    }
+}

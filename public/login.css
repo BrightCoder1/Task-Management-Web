@@ -1,0 +1,230 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: white; /* Gradient background */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Ensures the background stays fixed */
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: stretch; /* Stretch items vertically */
+    height: 100vh; /* Full height of the viewport */
+    width: 100%;
+}
+
+.image-container {
+    flex: 1; /* Take up half of the page */
+    position: relative; /* Position relative for z-index */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Full height of the container */
+    margin-right: 0px; /* Adjust margin to overlap with login container */
+}
+
+.image-container img {
+    width: auto; /* Maintain aspect ratio */
+    height: 100%; /* Adjust height as needed */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    border-radius: 0; /* Remove rounded corners */
+    z-index: -1; /* Send image behind the form container */
+}
+
+.login-container {
+    flex: 1; /* Take up half of the page */
+    background: white;
+    padding: 2rem;
+    border-radius: 0; /* Remove rounded corners */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    height: 100vh; /* Full height of the container */
+    position: relative; /* Position relative for z-index */
+    z-index: 1; /* Ensure form container is above the image */
+    box-shadow: none; /* Remove box shadow */
+    opacity: 0; /* Start with opacity 0 for animation */
+    animation: flipIn 0.5s forwards; /* Flip-in animation */
+}
+
+@keyframes flipIn {
+    from {
+        transform: rotateY(-90deg);
+        opacity: 0;
+    }
+    to {
+        transform: rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-container input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 100px; /* Add border-radius for curved edges */
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s, background-color 0.3s;
+}
+
+.input-container input:focus {
+    border-color: #007bff;
+}
+
+.input-container label {
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    background: white;
+    padding: 0 0.25rem;
+    color: #999;
+    pointer-events: none;
+    transition: all 0.3s;
+    border-radius: 4px; /* Add border-radius for curved edges */
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+    top: 0;
+    left: 0.5rem;
+    color: #007bff;
+    font-size: 0.75rem;
+}
+
+button {
+    padding: 0.75rem 1.5rem; /* Adjust padding for better sizing */
+    border: none;
+    border-radius: 100px;
+    background: #007bff;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add box shadow */
+}
+
+button:hover {
+    background: #0056b3;
+    transform: translateY(-2px); /* Slightly lift the button */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* Enhance box shadow on hover */
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Add focus ring */
+}
+
+button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+button:active {
+    transform: translateY(0); /* Return button to original position on click */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Keep original shadow on click */
+}
+
+.register-link {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.register-link a:hover {
+    color: #0056b3;
+}
+
+.register-container {
+    display: none; /* Hide register container initially */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .image-container,
+    .login-container {
+        flex: none;
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .login-container {
+        padding: 1rem;
+        height: auto;
+    }
+}
+
+.logo {
+    display: block;
+    margin: 0 auto 2rem auto; /* Center the logo and add bottom margin */
+    width: 100px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.forgot-password-link {
+    align-self: flex-start; /* Align to the start of the form */
+    margin-bottom: 1rem; /* Add space below */
+    color: #007bff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s;
+}
+
+.forgot-password-link:hover {
+    color: #0056b3;
+}
+
+#error{
+    position: absolute;
+    top: 1rem;
+    right: 4rem;
+    color: red;
+    border: 2px;
+    border-bottom: 1px solid red;
+    padding: 0px 6px;
+}

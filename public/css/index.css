@@ -1,0 +1,281 @@
+.col-lg-7 {
+    display: flex !important;
+    flex: 0 0 auto;
+    width: 58.33333333%;
+    justify-content: space-around !important;
+    width: 100% !important;
+}
+
+/* Adjusted styles for admin_page.html */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #007bff;
+    /* Navbar background color */
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    position: fixed;
+    /* Fixed position for navbar */
+    width: 100%;
+    z-index: 1000;
+    /* Ensure navbar is above other content */
+    top: 0;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.user-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-size: 2.0rem;
+    margin-right: 30px;
+}
+
+.user-btn:focus {
+    outline: none;
+}
+
+.fa-circle-user {
+    color: white;
+}
+
+.container {
+    max-width: 95%;
+    margin: 65px auto 20px;
+    /* Adjusted margin to accommodate fixed navbar */
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+main {
+    padding: 20px;
+    /* Adjusted padding */
+}
+
+footer {
+    background-color: #a3c6ed;
+    color: white;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px 10px 10px 10px;
+    /* Rounded top corners for the footer */
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-section {
+    flex: 1;
+    margin: 0 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Light background for sections */
+    border-radius: 10px;
+    /* Rounded corners for sections */
+    padding: 10px;
+}
+
+.footer-section h4 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #ffffff;
+    padding-bottom: 5px;
+    border-radius: 10px;
+    /* Rounded corners for section headers */
+}
+
+.footer-section p,
+.footer-section a {
+    margin: 5px 0;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #ffffff;
+    padding-top: 10px;
+    border-radius: 0 0 10px 10px;
+    /* Rounded bottom corners for the bottom section */
+}
+
+.footer-section .fab {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: white;
+}
+
+.footer-section .fab:hover {
+    color: #c0c0c0;
+}
+
+
+h1 {
+    color: #000000 !important;
+}
+
+p {
+    line-height: 1.6;
+}
+
+.info-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info-box {
+    background-color: #a3c6ed;
+    color: white;
+    flex: 1;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h3 {
+    margin: 0 0 10px;
+    font-size: 25px !important;
+}
+
+#usermanagement {
+    font-size: 24px !important;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-table th,
+.user-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.user-table th {
+    background-color: #a7ccf3;
+    color: white;
+}
+
+.user-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.user-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.user-table select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.assign-task-btn {
+    background-color: #6daaeb;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.assign-task-btn:hover {
+    background-color: #a4c5e9;
+}
+
+.logout-btn {
+    background-color: #dc3545;
+    /* Red color for logout button */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-left: auto;
+    /* Pushes the button to the right */
+}
+
+.logout-btn:hover {
+    background-color: #c82333;
+    /* Darker red on hover */
+}
+
+
+.custom-block-scroll {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+    padding: 30px;
+    overflow-y: scroll !important;
+    overflow-X: scroll !important;
+}
+
+.custom-block-table {
+    height: 70vh !important;
+}
