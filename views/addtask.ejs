@@ -96,7 +96,7 @@
                                     <%= task.taskCompleted ? 'Completed' : 'Pending' %>
                                 </td>
                                 <td>
-                                    Edit Task Now
+                                    <a id="edit-task" href="/addtask/edit/<%= task._id %>">Edit Task</a>
                                 </td>
                             </tr>
                             <% }); %>

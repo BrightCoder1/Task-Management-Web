@@ -10,7 +10,9 @@
 
     <title>Task Management</title>
     <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
-    
+
+    <link rel="stylesheet" href="/task.css">
+
     <link rel="stylesheet" href="/css/index.css">
     <!-- CSS FILES -->
     <link rel="preconnect" href="/https://fonts.googleapis.com">
@@ -111,7 +113,8 @@ Bootstrap 5 Dashboard Admin Template
 
     <main style="width: 100%;" class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
         <div class="title-group mb-3">
-            <h1 class="h2 mb-0">Task Information Of : <%= user.username.toUpperCase()%></h1>
+            <h1 class="h2 mb-0">Task Information Of : <%= user.username.toUpperCase()%>
+            </h1>
         </div>
 
         <div class="row my-4">
@@ -136,6 +139,8 @@ Bootstrap 5 Dashboard Admin Template
 
                                     <th scope="col">TaskStatus</th>
 
+                                    <th scope="col">Update Task</th>
+
 
                                 </tr>
                             </thead>
@@ -150,18 +155,31 @@ Bootstrap 5 Dashboard Admin Template
                                         </td>
 
 
-                                        <td scope="row"><%= task.taskName %></td>
-
-                                        <td scope="row"><%= task.taskDescription %></td>
-
-                                        <td scope="row"><%= new Date(task.assigneDate).toLocaleDateString() %></td>
-
-                                        <td scope="row"><%= new Date(task.targetDate).toLocaleDateString() %></td>
-
-                                        <td class="text-danger" scope="row">
-                                            <%= task.taskCompleted ? 'Completed' : 'Pending' %>
+                                        <td scope="row">
+                                            <%= task.taskName %>
                                         </td>
 
+                                        <td scope="row">
+                                            <%= task.taskDescription %>
+                                        </td>
+
+                                        <td scope="row">
+                                            <%= new Date(task.assigneDate).toLocaleDateString() %>
+                                        </td>
+
+                                        <td scope="row">
+                                            <%= new Date(task.targetDate).toLocaleDateString() %>
+                                        </td>
+
+                                        <td class="text-danger" scope="row">
+                                            <%= task.taskCompleted ? 'Completed' : 'In Progress' %>
+                                        </td>
+
+                                        <td>
+                                            <a id="edit-task" href="/addtask/edit/<%= task._id %>">Edit Task</a>
+                                        </td>
+                                        </form>
+                                        </td>
                                     </tr>
                                     <% }) %>
                             </tbody>

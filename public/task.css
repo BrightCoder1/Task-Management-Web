@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 65px auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -14,16 +14,20 @@ body {
 }
 
 .navbar {
-    background-color: #e63946; /* Navbar background color */
+    background-color: #e63946;
+    /* Navbar background color */
     color: white;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    position: fixed; /* Fixed position for navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    position: fixed;
+    /* Fixed position for navbar */
     width: 100%;
-    z-index: 1000; /* Ensure navbar is above other content */
+    z-index: 1000;
+    /* Ensure navbar is above other content */
     top: 0;
 }
 
@@ -55,21 +59,25 @@ body {
 .fa-circle-user {
     color: white;
 }
+
 .logout-btn {
-    background-color: white; /* Red color for logout button */
+    background-color: white;
+    /* Red color for logout button */
     color: #e63946;
     border: none;
     padding: 8px 16px;
     font-size: 14px;
     border-radius: 100px;
     cursor: pointer;
-    margin-left: auto; /* Pushes the button to the right */
+    margin-left: auto;
+    /* Pushes the button to the right */
     text-decoration: none;
-    margin-right: 1rem;
+    margin-right: 2rem;
 }
 
 .logout-btn:hover {
-    background-color: #ebeaea; /* Darker red on hover */
+    background-color: #ebeaea;
+    /* Darker red on hover */
 }
 
 
@@ -99,6 +107,7 @@ body {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .btn-container {
@@ -158,11 +167,11 @@ body {
     padding: 8px;
     text-align: center;
 }
-
 .task-details-table th {
     background-color: #e63946;
     color: white;
 }
+
 .high-priority {
     color: red;
     font-weight: bold;
@@ -188,8 +197,10 @@ body {
     padding: 8px 16px;
     margin-right: 5px;
     cursor: pointer;
-    background-color: #007bff; /* Blue color */
-    color: #fff; /* White text color */
+    background-color: #007bff;
+    /* Blue color */
+    color: #fff;
+    /* White text color */
     border: none;
     border-radius: 4px;
     font-size: 14px;
@@ -199,30 +210,37 @@ body {
 /* Hover effect */
 .edit-btn:hover,
 .review-btn:hover {
-    background-color: #0056b3; /* Darker blue color on hover */
+    background-color: #0056b3;
+    /* Darker blue color on hover */
 }
 
 /* Active/focus effect */
 .edit-btn:active,
 .review-btn:active {
-    background-color: #0056b3; /* Darker blue color when active */
+    background-color: #0056b3;
+    /* Darker blue color when active */
 }
 
 /* Optional: Adjust margin or padding as needed */
 .edit-btn {
-    margin-right: 5px; /* Adjust margin for spacing */
+    margin-right: 5px;
+    /* Adjust margin for spacing */
 }
 
 .review-btn {
-    margin-right: 10px; /* Adjust margin for spacing */
+    margin-right: 10px;
+    /* Adjust margin for spacing */
 }
+
 .hidden {
     display: none;
 }
+
 /* Responsive Design */
 @media screen and (max-width: 992px) {
     .container {
-        max-width: 95%; /* Adjusted max-width for smaller screens */
+        max-width: 95%;
+        /* Adjusted max-width for smaller screens */
     }
 }
 
@@ -245,6 +263,53 @@ body {
 
 @media screen and (max-width: 576px) {
     .task-details-table {
-        font-size: 14px; /* Decrease font size for smaller screens */
+        font-size: 14px;
+        /* Decrease font size for smaller screens */
     }
+}
+
+.update-status-btn {
+    font-size: 12px;
+    border: 2px solid #c82333;
+    border-radius: 4px;
+    color: #ff003f;
+    background: transparent;
+    transition: 0.3s;
+}
+
+.update-status-btn:hover {
+    background-color: #c82333;
+    color: #fff;
+}
+
+#select {
+    border: 1px solid #ff003f;
+    padding: 6px 0px;
+    color: #fff;
+    border-radius: 4px;
+    background: #ff003f;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+#edit-task {
+    border: 2px solid blue;
+    padding: 8px 4px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    background: blue;
+    color: #fff;
+    transition: 0.3s;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 105px;
+}
+#edit-task:hover{
+    background-color: #fff;
+    color: blue;
 }

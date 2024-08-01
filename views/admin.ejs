@@ -153,9 +153,9 @@ Bootstrap 5 Dashboard Admin Template
 
             <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
                 <div class="title-group mb-3">
-                    <h1 class="h2 mb-0">Admin Dashboard</h1>
+                    <h1 class="h2 mb-0">Manager Dashboard</h1>
 
-                    <small class="text-muted">Hello Thomas, welcome to Admin Dashboard !</small>
+                    <small class="text-muted">Hello <%= user.username %>, welcome to Admin Dashboard !</small>
                 </div>
 
                 <div class="row my-4">
@@ -215,42 +215,6 @@ Bootstrap 5 Dashboard Admin Template
                                 <p>90%</p>
                             </div>
                         </div>
-                        <h2 id="usermanagement">User Management</h2>
-                        <table class="user-table">
-                            <thead>
-                                <tr>
-                                    <th>Serial no.</th>
-                                    <th>Name</th>
-                                    <th>Projects</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% all.forEach((employer, index)=> { %>
-                                    <tr>
-                                        <td>
-                                            <%= index + 1 %>
-                                        </td>
-                                        <td>
-                                            <%= employer.username %>
-                                        </td>
-                                        <td>
-                                            <%= employer.email %>
-                                        </td>
-                                        <td>
-                                            <%= employer.isAdmin ? 'Admin' : 'Employee' %>
-                                        </td>
-                                        <td>
-                                            <%= new Date(employer.createdAt).toLocaleDateString() %>
-                                        </td>
-                                        <td><a href="/addtask/<%= employer._id %>" class="assign-task-btn">Assign
-                                                Task</a></td>
-                                    </tr>
-                                    <% }); %>
-                            </tbody>
-                        </table>
                     </main>
             </main>
 

@@ -1,0 +1,29 @@
+tr{
+    text-align: center;
+}
+#addform{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+}
+
+#select{
+    border:2px solid red;
+    padding: 4px 8px;
+    outline: none;
+}
+#addsubmit{
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: red;
+    border: 2px solid red;
+    background: transparent;
+    transition: 0.3s;
+}
+
+#addsubmit:hover{
+    color: #fff;
+    background-color: red;
+}

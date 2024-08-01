@@ -61,8 +61,8 @@
                                     alt="">
 
                                 <div class="d-flex flex-column">
-                                    <small>Thomas</small>
-                                    <a href="#">thomas@site.com</a>
+                                    <small><%= user.username %></small>
+                                    <a href="/setting/<%= user._id %>"><%= user.email %></a>
                                 </div>
                             </div>
                         </li>
@@ -172,11 +172,17 @@
                                 <strong>User ID:</strong>
                                 <span><%= user._id %></span>
                             </p>
-                            
-                            <p class="d-flex flex-wrap mb-2">
-                                <strong>Admin:</strong>
-                                <span><%= user.isAdmin %></span>
-                            </p>
+                            <% if (user.super === true) { %>
+                                <p class="d-flex flex-wrap mb-2">
+                                    <strong>Admin:</strong>
+                                    <span>Boss</span>
+                                </p>
+                            <% } else { %>
+                                <p class="d-flex flex-wrap mb-2">
+                                    <strong>Admin:</strong>
+                                    <span><%= user.isAdmin ? 'Manager' : 'Employee'  %></span>
+                                </p>
+                            <% } %>
                             <p class="d-flex flex-wrap mb-2">
                                 <strong>Created:</strong>
                                 <span><%= user.createdAt %></span>

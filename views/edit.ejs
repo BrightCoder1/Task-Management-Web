@@ -34,13 +34,13 @@
                     <label for="address" class="input-label">Address</label>
                 </div>
                 <div class="form-group">
-                    <label for="isAdmin">Admin</label>
+                    <label for="isAdmin">Position :</label>
                     <div class="admin">
-                        <label for="isAdminTrue">True</label>
+                        <label for="isAdminTrue">Manager</label>
                         <input class="admin-input" type="radio" id="isAdminTrue" name="isAdmin" value="true" <%= user.isAdmin ? 'checked' : '' %>>
                     </div>
                     <div class="admin">
-                        <label for="isAdminFalse">False</label>
+                        <label for="isAdminFalse">Employee</label>
                         <input class="admin-input" type="radio" id="isAdminFalse" name="isAdmin" value="false" <%= !user.isAdmin ? 'checked' : '' %>>
                     </div>
                 </div>

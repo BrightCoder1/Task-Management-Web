@@ -11,6 +11,9 @@
     <title>Task Management</title>
     <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
     
+
+    <link rel="stylesheet" href="/employee.css">
+
     <link rel="stylesheet" href="/css/index.css">
     <!-- CSS FILES -->
     <link rel="preconnect" href="/https://fonts.googleapis.com">
@@ -146,10 +149,12 @@ Bootstrap 5 Dashboard Admin Template
             </nav>
 
             <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
-                <div class="title-group mb-3">
-                    <h1 class="h2 mb-0">Employee Dashboard</h1>
-
-                    <small class="text-muted">Hello Thomas, welcome to Admin Dashboard !</small>
+                <div class="title-group mb-3" id="employee-flex">
+                    <div class="box-employee">
+                        <h1 class="h2 mb-0">Employee Dashboard</h1>
+                        <small class="text-muted">Hello <%= user.username %>, welcome to Admin Dashboard !</small>
+                    </div>
+                    <a href="/addtask/<%= user._id %>" id="employee-addtask">Add Task Employee</a>
                 </div>
 
                 <div class="row my-4">

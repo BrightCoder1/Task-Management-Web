@@ -7,8 +7,9 @@
 
     <meta name="description" content="">
     <meta name="author" content="Tooplate">
-    
+
     <title>Task Management</title>
+    <link rel="stylesheet" href="/task.css">
     <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/index.css">
@@ -158,52 +159,48 @@ Bootstrap 5 Dashboard Admin Template
                                     <thead>
                                         <tr>
                                             <th scope="col">S.No</th>
-
                                             <th scope="col">User</th>
-
-                                            <th scope="col">Taskname</th>
-
+                                            <th scope="col">Task Name</th>
                                             <th scope="col">Description</th>
-
                                             <th scope="col">Assigne Date</th>
-
                                             <th scope="col">Target Date</th>
-
-                                            <th scope="col">TaskStatus</th>
-
-
+                                            <th scope="col">Task Status</th>
+                                            <th scope="col">Update Task</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
-
-                                        <% tasks.forEach(function(task,index){ %>
+                                        <% tasks.forEach(function(task, index) { %>
                                             <tr>
-
                                                 <td scope="row">
-                                                    <%= index+1 %>
+                                                    <%= index + 1 %>
                                                 </td>
-
                                                 <td scope="row">
                                                     <%= task.username %>
                                                 </td>
-
-                                                <td scope="row"><%= task.taskName %></td>
-
-                                                <td scope="row"><%= task.taskDescription %></td>
-
-                                                <td scope="row"><%= new Date(task.assigneDate).toLocaleDateString() %></td>
-
-                                                <td scope="row"><%= new Date(task.targetDate).toLocaleDateString() %></td>
-
-                                                <td class="text-danger" scope="row">
-                                                    <%= task.taskCompleted ? 'Completed' : 'Pending' %>
+                                                <td scope="row">
+                                                    <%= task.taskName %>
                                                 </td>
-
+                                                <td scope="row">
+                                                    <%= task.taskDescription %>
+                                                </td>
+                                                <td scope="row">
+                                                    <%= new Date(task.assigneDate).toLocaleDateString() %>
+                                                </td>
+                                                <td scope="row">
+                                                    <%= new Date(task.targetDate).toLocaleDateString() %>
+                                                </td>
+                                                <td class="text-danger" scope="row">
+                                                    <%= task.taskCompleted ? 'Completed' : 'In Progress' %>
+                                                </td>
+                                                
+                                                <td>
+                                                    <a id="edit-task" href="/addtask/edit/<%= task._id %>">Edit Task</a>
+                                                </td>
                                             </tr>
-                                            <% }) %>
+                                            <% }); %>
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>

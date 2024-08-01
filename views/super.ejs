@@ -117,7 +117,7 @@
             <main class="main-wrapper col-md-9 ms-sm-auto py-4 col-lg-9 px-md-4 border-start">
                 <div class="title-group mb-3">
                     <h1 class="h2 mb-0">Super Admin Dashboard</h1>
-                    <small class="text-muted">Hello Thomas, welcome to Admin Dashboard!</small>
+                    <small class="text-muted">Hello <%= user.username %>, welcome to Super Admin Dashboard!</small>
                 </div>
 
                 <% if (typeof successMessage !=='undefined' ) { %>
@@ -148,14 +148,14 @@
 
                                         <p class="d-flex flex-wrap mb-2">
                                             <strong>Email:</strong>
-                                            <a href="#">
+                                            <a href="/setting/<%= user._id %>">
                                                 <%= user.email %>
                                             </a>
                                         </p>
 
                                         <p class="d-flex flex-wrap mb-0">
                                             <strong>Phone:</strong>
-                                            <a href="#">
+                                            <a href="/setting/<%= user._id %>">
                                                 <%= user.contact %>
                                             </a>
                                         </p>
@@ -194,6 +194,7 @@
                                             <th>Status</th>
                                             <th>Actions</th>
                                             <th>Profile</th>
+                                            <th>Add Employee</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -209,8 +210,8 @@
                                                     <%= employer.email %>
                                                 </td>
                                                 <td>
-                                                    <%= employer.isAdmin ? 'Admin' : 'Employee' %>
-                                                </td>
+                                                    <%= employer.isAdmin ? 'Manager' : 'Employee' %>
+                                                </td> 
                                                 <td>
                                                     <%= new Date(employer.createdAt).toLocaleDateString() %>
                                                 </td>
@@ -223,11 +224,18 @@
                                                 </td>
                                                 <td><a class="update" href="/viewprofile/<%= employer._id %>">View</a>
                                                 </td>
+
+                                                <td>
+                                                    <a href="/add/employee/user/<%= employer._id %>" class="update">Add Employee</a>
+                                                </td>
                                             </tr>
                                             <% }); %>
                                     </tbody>
                                 </table>
                             </main>
+                            <!-- <header>
+                                <p>Copyright © 2024 tasmmanagement.com</p>
+                            </header> -->
             </main>
         </div>
     </div>

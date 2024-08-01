@@ -14,7 +14,7 @@ const taskSchema = new mongoose.Schema({
     },
     taskCompleted: {
         type: Boolean,
-        enum:['complete','pending'],
+        enum: ['complete', 'pending'],
         default: false
     },
     assigneDate: {
@@ -80,16 +80,16 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    super:{
-        type:Boolean,
-        default:false
+    super: {
+        type: Boolean,
+        default: false
     },
     tasks: [taskSchema],
-    tokens:[
+    tokens: [
         {
-            token:{
-                type:String,
-                required:true
+            token: {
+                type: String,
+                required: true
             }
         }
     ]
@@ -98,20 +98,20 @@ const userSchema = new mongoose.Schema({
 const key = process.env.SECREATKEY;
 
 // generate token
-userSchema.methods.generateToken = async function(){
+userSchema.methods.generateToken = async function () {
     try {
         const token = await jwt.sign({
-            _id:this._id.toString(),
+            _id: this._id.toString(),
         },
-        key,
-        {
-            expiresIn:"1h"
-        });
-        this.tokens = this.tokens.concat({token:token});
+            key,
+            {
+                expiresIn: "1h"
+            });
+        this.tokens = this.tokens.concat({ token: token });
         await this.save();
         return token;
     } catch (error) {
-        console.log("Token Error",error);
+        console.log("Token Error", error);
     }
 }
 

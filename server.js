@@ -38,7 +38,7 @@ app.post("/register", async (req, res) => {
             // generate token
             const token = await newuser.generateToken();
             res.cookie("Token", token, {
-                expires: new Date(Date.now() + 60000)
+                expires: new Date(Date.now() + 6000000)
             });
 
             await newuser.save();
@@ -70,17 +70,17 @@ app.post("/login", async (req, res) => {
                 if (user.super === true) {
 
                     res.cookie("token", token, {
-                        expires: new Date(Date.now() + 60000)
+                        expires: new Date(Date.now() + 6000000)
                     })
                     res.status(201).redirect(`/overview/${user._id}`)
                 } else if (user.isAdmin === true) {
                     res.cookie("token", token, {
-                        expires: new Date(Date.now() + 60000)
+                        expires: new Date(Date.now() + 6000000)
                     })
                     res.status(201).redirect(`/overview/${user._id}`)
                 } else {
                     res.cookie("token", token, {
-                        expires: new Date(Date.now() + 60000)
+                        expires: new Date(Date.now() + 6000000)
                     })
                     res.status(201).redirect(`/overview/${user._id}`)
 
@@ -104,6 +104,7 @@ app.get("/profile/:id", authmiddleware ,async (req, res) => {
 
         const user = await Data.findById(id);
         if (user) {
+
             res.status(201).render("profile", {
                 user,
                 id: user._id
@@ -167,8 +168,7 @@ app.get("/overview/:id",authmiddleware,async (req, res) => {
                 })
             } else if (user.isAdmin === true) {
                 res.status(201).render("admin", {
-                    user,
-                    all: filteruser
+                    user
                 })
             } else {
                 res.status(201).render("employee", {
@@ -186,38 +186,17 @@ app.get("/overview/:id",authmiddleware,async (req, res) => {
 });
 
 // tasks
-app.get("/task/:id",authmiddleware ,async (req, res) => {
+app.get("/task/:id", authmiddleware, async (req, res) => {
     try {
         const { id } = req.params;
         const user = await Data.findById(id);
-
-        if (user.super === true) {
+        if (user.super === true || user.isAdmin === true) {
             const allUsers = await Data.find({});
             let allTasks = [];
             allUsers.forEach(user => {
                 user.tasks.forEach(task => {
                     allTasks.push({
-                        username: user.username,
-                        taskName: task.taskName,
-                        taskDescription: task.taskDescription,
-                        taskCompleted: task.taskCompleted,
-                        assigneDate: task.assigneDate,
-                        targetDate: task.targetDate,
-                        priority: task.priority
-                    });
-                });
-            });
-
-            res.status(201).render("task", {
-                tasks: allTasks,
-                user
-            });
-        } else if (user.isAdmin === true) {
-            const allUsers = await Data.find({});
-            let allTasks = [];
-            allUsers.forEach(user => {
-                user.tasks.forEach(task => {
-                    allTasks.push({
+                        _id: task._id,  // Add task ID here
                         username: user.username,
                         taskName: task.taskName,
                         taskDescription: task.taskDescription,
@@ -236,6 +215,7 @@ app.get("/task/:id",authmiddleware ,async (req, res) => {
         } else {
             // For regular users, only show their tasks
             const userTasks = user.tasks.map(task => ({
+                _id: task._id,  // Add task ID here
                 username: user.username,
                 taskName: task.taskName,
                 taskDescription: task.taskDescription,
@@ -257,6 +237,33 @@ app.get("/task/:id",authmiddleware ,async (req, res) => {
 });
 
 
+// app.post("/tasks/update/:id", async (req, res) => {
+//     const { id } = req.params;
+//     const { status } = req.body;
+
+//     try {
+//         const user = await Data.findOneAndUpdate(
+//             { "tasks._id": id },
+//             { $set: { "tasks.$.taskCompleted": status === "true" } },
+//             { new: true }
+//         );
+
+//         if (!user) {
+//             return res.status(404).json({ msg: "Task not found" });
+//         } else {
+//             // Redirect to the task page after updating
+//             // res.status(201).redirect(`/task/${user._id}`);
+//             res.status(200).render("update");
+//         }
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).render("profile", { error: "Internal server error.", user: req.user });
+//     }
+// });
+
+
+
+
 // addtask
 app.get("/addtask/:id",async (req, res) => {
     try {
@@ -271,6 +278,53 @@ app.get("/addtask/:id",async (req, res) => {
                 tasks: user.tasks
             })
         }
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+app.get("/addtask/edit/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const user = await Data.findOne({ "tasks._id": id }, { "tasks.$": 1 });
+        if (!user) {
+            return res.status(404).send("Task not found");
+        }
+        const taskToEdit = user.tasks[0];
+        res.status(201).render("taskedit", {
+            task: taskToEdit
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Server error");
+    }
+});
+
+
+
+// update task 
+app.post("/addtask/update/:id", async (req, res) => {
+    const {id} = req.params;
+
+    const { taskName, taskDescription, priority, assigneDate, targetDate, taskCompleted } = req.body;
+
+    try {
+        const task = await Data.findOneAndUpdate(
+            { "tasks._id" : id},
+            {
+                $set:{
+                   "tasks.$.taskName": taskName,
+                    "tasks.$.taskDescription": taskDescription,
+                    "tasks.$.priority": priority,
+                    "tasks.$.assigneDate": assigneDate,
+                    "tasks.$.targetDate": targetDate,
+                    "tasks.$.taskCompleted": taskCompleted
+                }
+            },
+            {new :true}
+        )
+
+        res.status(201).redirect(`/addtask/${task._id}`)
     } catch (error) {
         console.log(error);
     }
@@ -511,10 +565,28 @@ app.get("/completTask", async (req, res) => {
 })
 
 
+// add employee to manager
+app.get("/add/employee/user/:id", authmiddleware,async (req, res) => {
+    try {
+        const { id } = req.params;
+        const employees = await Data.find({ isAdmin: false }); // Fetching only non-admin employees
 
+        const manager = await Data.find({});
+        
+        const filteruser = manager.filter(user => !user.isAdmin && !user.super);
+        console.log(filteruser);
+        
+        res.status(200).render("adduser", { employees ,
+            managers:filteruser
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 connectDB().then(() => {
     app.listen(port, () => {
-        console.log(`http://localhost:${port}/register`);
+        console.log(`http://localhost:${port}/login`);
     });
 });
