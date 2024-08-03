@@ -28,15 +28,7 @@
     <link href="/css/apexcharts.css" rel="stylesheet">
 
     <link href="/css/tooplate-mini-finance.css" rel="stylesheet">
-    <!--
 
-Tooplate 2135 Mini Finance
-
-https://www.tooplate.com/view/2135-mini-finance
-
-Bootstrap 5 Dashboard Admin Template
-
--->
 </head>
 
 <body>
@@ -120,10 +112,13 @@ Bootstrap 5 Dashboard Admin Template
         <div class="row my-4">
             <div class="col-lg-12 col-12">
                 <div class="custom-block bg-white">
-                    <h5 class="mb-4">All Tasks</h5>
+                    <div class="flexbox">
+                        <h5 class="mb-4">All Tasks</h5>
+                        <button id="download-pdf-btn" class="assign-task-btn download">Download</button>
+                    </div>
 
                     <div class="table-responsive">
-                        <table class="account-table table">
+                        <table id="task-table" class="account-table table">
                             <thead>
                                 <tr>
                                     <th scope="col">S.No</th>
@@ -188,12 +183,21 @@ Bootstrap 5 Dashboard Admin Template
                 </div>
             </div>
     </main>
-
+    <script>
+        document.getElementById('download-pdf-btn').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.autoTable({ html: '#task-table' });
+            doc.save('tasks.pdf');
+        });
+    </script>
     <!-- JAVASCRIPT FILES -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/apexcharts.min.js"></script>
     <script src="/js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
 </body>
 
 </html>

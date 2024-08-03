@@ -167,6 +167,7 @@ body {
     padding: 8px;
     text-align: center;
 }
+
 .task-details-table th {
     background-color: #e63946;
     color: white;
@@ -309,7 +310,27 @@ body {
     justify-content: center;
     width: 105px;
 }
-#edit-task:hover{
+
+#edit-task:hover {
     background-color: #fff;
     color: blue;
+}
+
+.flexbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+.download{
+    border: 2px solid #E63946;
+    color: #E63946;
+    background: transparent;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+.download:hover{
+    background-color: #E63946;
+    color:#fff;
 }

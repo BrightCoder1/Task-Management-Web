@@ -6,6 +6,111 @@
     color: #fff;
 }
 #red{
-    border:2px solid red;
+    border:2px solid #E63946;
+    background-color: #E63946;
+}
+
+
+.flexbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.download{
+    border: 2px solid #E63946;
+    color: #E63946;
+    background: transparent;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+.download:hover{
+    background-color: #E63946;
+    color:#fff;
+}
+
+
+.update {
+    border: 2px solid green;
+    padding: 2px 5px;
+    border-radius: 6px;
+    background: green;
+    color: #fff;
+}
+
+#red {
+    border: 2px solid red;
     background-color: red;
+}
+
+.flexbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.download {
+    border: 2px solid #E63946;
+    color: #E63946;
+    background: transparent;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.download:hover {
+    background-color: #E63946;
+    color: #fff;
+}
+
+/* Responsive table styles */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.user-table th {
+    background-color: #a7ccf3 !important;
+    color: white !important;
+}
+
+.user-table th,
+.user-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+
+
+@media (max-width: 768px) {
+    .user-table th,
+    .user-table td {
+        font-size: 14px;
+        padding: 8px 10px;
+    }
+
+    .info-boxes {
+        flex-direction: column;
+    }
+
+    .info-box {
+        margin-bottom: 10px;
+    }
+
+    .flexbox {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .download {
+        margin-top: 10px;
+    }
 }

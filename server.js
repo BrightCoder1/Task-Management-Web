@@ -98,7 +98,7 @@ app.post("/login", async (req, res) => {
 });
 
 // // Profile
-app.get("/profile/:id", authmiddleware ,async (req, res) => {
+app.get("/profile/:id", authmiddleware, async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -120,7 +120,7 @@ app.get("/profile/:id", authmiddleware ,async (req, res) => {
 });
 
 // // Setting Route
-app.get("/setting/:id", authmiddleware ,async (req, res) => {
+app.get("/setting/:id", authmiddleware, async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -149,35 +149,38 @@ app.get("/setting/:id", authmiddleware ,async (req, res) => {
     }
 });
 
-// // Overview Route
-app.get("/overview/:id",authmiddleware,async (req, res) => {
+
+// overview 
+app.get("/overview/:id", authmiddleware, async (req, res) => {
     try {
         const { id } = req.params;
         const user = await Data.findById(id);
 
-        console.log(user);
         if (user) {
             const allusers = await Data.find({});
-
             const filteruser = allusers.filter(user => !user.super);
 
             if (user.super === true) {
                 res.status(201).render("super", {
                     user,
                     all: filteruser
-                })
+                });
             } else if (user.isAdmin === true) {
+                const employeeIDs = user.employer.map(emp => emp.employee);
+                const employees = await Promise.all(employeeIDs.map(empID => Data.findById(empID)));
+
                 res.status(201).render("admin", {
-                    user
-                })
+                    user,
+                    employees
+                });
             } else {
                 res.status(201).render("employee", {
                     user
-                })
+                });
             }
-        }
-        else {
-            console.log("User not found")
+        } else {
+            console.log("User not found");
+            res.status(404).render("profile", { error: "User not found." });
         }
     } catch (error) {
         console.log(error);
@@ -185,12 +188,13 @@ app.get("/overview/:id",authmiddleware,async (req, res) => {
     }
 });
 
+
 // tasks
 app.get("/task/:id", authmiddleware, async (req, res) => {
     try {
         const { id } = req.params;
         const user = await Data.findById(id);
-        if (user.super === true || user.isAdmin === true) {
+        if (user.super === true) {
             const allUsers = await Data.find({});
             let allTasks = [];
             allUsers.forEach(user => {
@@ -212,7 +216,41 @@ app.get("/task/:id", authmiddleware, async (req, res) => {
                 tasks: allTasks,
                 user
             });
-        } else {
+
+        } else if (user.isAdmin === true) {
+            // Admin can view tasks of their employees
+            const employeeIDs = user.employer.map(emp => emp.employee);
+            const employees = await Promise.all(employeeIDs.map(empID => Data.findById(empID)));
+
+            let allTasks = [];
+            employees.forEach(employee => {
+                employee.tasks.forEach(task => {
+                    allTasks.push({
+                        _id: task._id,
+                        username: employee.username,
+                        taskName: task.taskName,
+                        taskDescription: task.taskDescription,
+                        taskCompleted: task.taskCompleted,
+                        assigneDate: task.assigneDate,
+                        targetDate: task.targetDate,
+                        priority: task.priority
+                    });
+                });
+            });
+
+            res.status(201).render("task", {
+                tasks: allTasks,
+                user
+            });
+
+        }
+        else {
+
+            // const employeeIDs = user.employer.map(emp => emp.employee);
+            // const employees = await Promise.all(employeeIDs.map(empId => Data.findById(empId)));
+            // console.log(employees);
+
+
             // For regular users, only show their tasks
             const userTasks = user.tasks.map(task => ({
                 _id: task._id,  // Add task ID here
@@ -232,7 +270,7 @@ app.get("/task/:id", authmiddleware, async (req, res) => {
         }
     } catch (error) {
         console.log(error);
-        res.status(500).render("profile", { error: "Internal server error.", user: req.user });
+        // res.status(500).render("profile", { error: "Internal server error.", user: req.user });
     }
 });
 
@@ -265,7 +303,7 @@ app.get("/task/:id", authmiddleware, async (req, res) => {
 
 
 // addtask
-app.get("/addtask/:id",async (req, res) => {
+app.get("/addtask/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const user = await Data.findById(id);
@@ -304,16 +342,16 @@ app.get("/addtask/edit/:id", async (req, res) => {
 
 // update task 
 app.post("/addtask/update/:id", async (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
 
     const { taskName, taskDescription, priority, assigneDate, targetDate, taskCompleted } = req.body;
 
     try {
         const task = await Data.findOneAndUpdate(
-            { "tasks._id" : id},
+            { "tasks._id": id },
             {
-                $set:{
-                   "tasks.$.taskName": taskName,
+                $set: {
+                    "tasks.$.taskName": taskName,
                     "tasks.$.taskDescription": taskDescription,
                     "tasks.$.priority": priority,
                     "tasks.$.assigneDate": assigneDate,
@@ -321,7 +359,7 @@ app.post("/addtask/update/:id", async (req, res) => {
                     "tasks.$.taskCompleted": taskCompleted
                 }
             },
-            {new :true}
+            { new: true }
         )
 
         res.status(201).redirect(`/addtask/${task._id}`)
@@ -363,7 +401,7 @@ app.post("/tasks/add", async (req, res) => {
 });
 
 
-app.get("/mytask/:id",authmiddleware ,async (req, res) => {
+app.get("/mytask/:id", authmiddleware, async (req, res) => {
     try {
         const { id } = req.params;
         const user = await Data.findById(id);
@@ -382,7 +420,7 @@ app.get("/mytask/:id",authmiddleware ,async (req, res) => {
 
 
 // view profile
-app.get("/viewprofile/:id",authmiddleware ,async (req, res) => {
+app.get("/viewprofile/:id", authmiddleware, async (req, res) => {
     try {
         const { id } = req.params;
         const user = await Data.findById(id);
@@ -443,8 +481,8 @@ app.post("/update/:id", async (req, res) => {
     }
 });
 
- 
-app.post("/update/profile/:id",authmiddleware, async (req, res) => {
+
+app.post("/update/profile/:id", authmiddleware, async (req, res) => {
     const { id } = req.params;
     const { username, email, birthday, address } = req.body;
 
@@ -463,7 +501,7 @@ app.post("/update/profile/:id",authmiddleware, async (req, res) => {
 })
 
 // updatepassword
-app.post("/update/password/:id",authmiddleware, async (req, res) => {
+app.post("/update/password/:id", authmiddleware, async (req, res) => {
     try {
         const { id } = req.params;
         const { currentpassword, password, cpassword } = req.body;
@@ -528,6 +566,101 @@ app.get("/employeeCount", async (req, res) => {
     }
 });
 
+app.get("/admin/employerCount/:id", async (req, res) => {
+    const { id } = req.params;
+    console.log(id); // Make sure this logs the expected ID
+    try {
+        const admin = await Data.findById(id);
+        if (!admin) {
+            return res.status(404).json({ error: "Admin not found" });
+        }
+        const employerCount = admin.employer.length;
+        res.json({ count: employerCount });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
+// app.get("/admin/employerTask/:id",async (req, res) => {
+//     const { id } = req.params;
+
+//     try {
+//         const admin = await Data.findById(id);
+//         if (!admin) {
+//             return res.status(404).json({ error: "Admin not found" });
+//         }
+//         const employerTask = admin.employer.map(emp => emp.employee);
+//         console.log(employerTask[0])
+
+//         for (let i = 0; i < employerTask.length; i++) {
+//             return element = employerTask[i];
+//         }
+//         console.log(element);
+
+//         const employerFind = await Data.findById(element);
+//         console.log(employerFind);
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+// })
+
+
+
+
+
+
+app.get("/admin/employerTask/:id", async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // Fetch the admin
+        const admin = await Data.findById(id);
+        if (!admin) {
+            return res.status(404).json({ error: "Admin not found" });
+        }
+
+        // Extract all employee IDs
+        const employeeIds = admin.employer.map(emp => emp.employee);
+
+        // Array to store employee details
+        const employees = [];
+
+        // Variable to count total tasks
+        let totalTasks = 0;
+
+        // Fetch details for each employee ID
+        for (const empId of employeeIds) {
+            const employee = await Data.findById(empId);
+            if (employee) {
+                // Add employee details to the array
+                employees.push(employee);
+
+                // Calculate the number of tasks
+                totalTasks += employee.tasks ? employee.tasks.length : 0;
+            } else {
+                console.log(`Employee with ID ${empId} not found`);
+            }
+        }
+
+        // Send the results as a JSON response
+        res.json({ employees, totalTasks });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+
+
+
+
+
+
+
+
 
 
 // Task Counter route
@@ -565,25 +698,116 @@ app.get("/completTask", async (req, res) => {
 })
 
 
-// add employee to manager
-app.get("/add/employee/user/:id", authmiddleware,async (req, res) => {
+
+// assigne employee
+app.get("/add/employee/user/:id", authmiddleware, async (req, res) => {
     try {
         const { id } = req.params;
-        const employees = await Data.find({ isAdmin: false }); // Fetching only non-admin employees
 
-        const manager = await Data.find({});
-        
-        const filteruser = manager.filter(user => !user.isAdmin && !user.super);
-        console.log(filteruser);
-        
-        res.status(200).render("adduser", { employees ,
-            managers:filteruser
+        // Fetching only non-admin and non-super employees
+        const employees = await Data.find({
+            isAdmin: false,
+            super: false
+        });
+
+        // Fetching only admin users for managers
+        const managers = await Data.find({ isAdmin: true });
+
+        // Create a dictionary to store the manager for each employee
+        let employeeManagerMap = {};
+
+        // Iterate through the managers and their employees
+        for (const manager of managers) {
+            for (const emp of manager.employer) {
+                const employee = await Data.findById(emp.employee);
+                if (employee) {
+                    if (!employeeManagerMap[employee._id]) {
+                        employeeManagerMap[employee._id] = new Set();
+                    }
+                    employeeManagerMap[employee._id].add(manager.username);
+                }
+            }
+        }
+
+        // Convert the sets to arrays for rendering
+        for (let employeeId in employeeManagerMap) {
+            employeeManagerMap[employeeId] = Array.from(employeeManagerMap[employeeId]);
+        }
+
+        res.status(200).render("adduser", {
+            employees,
+            managers,
+            employeeManagerMap
         });
     } catch (error) {
         console.log(error);
         res.status(500).send("Internal Server Error");
     }
 });
+
+
+// Route to remove a manager from an employee's team
+app.post("/remove/manager/from/team/:employeeId", authmiddleware, async (req, res) => {
+    try {
+        const { employeeId } = req.params;
+        const { managerId } = req.body; // Get managerId from the form data
+
+        // Fetch the manager
+        const manager = await Data.findById(managerId);
+        if (!manager) {
+            return res.status(404).send("Manager not found");
+        }
+
+        // Remove the employee from the manager's employer array
+        manager.employer = manager.employer ? manager.employer.filter(emp => emp.employee.toString() !== employeeId) : [];
+        await manager.save();
+
+        // Fetch the employee
+        const employee = await Data.findById(employeeId);
+        if (!employee) {
+            return res.status(404).send("Employee not found");
+        }
+
+        // Remove the manager from the employee's manager list
+        employee.managers = employee.managers ? employee.managers.filter(mgr => mgr.toString() !== managerId) : [];
+        await employee.save();
+
+        // Redirect back to the employee assignment page or another appropriate page
+        res.redirect(`/add/employee/user/${employeeId}`);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// Route to assign an employee to a manager
+app.post("/assign/employee/:id", async (req, res) => {
+    try {
+        const { id } = req.params; // Employee ID
+        const { managerId } = req.body; // Manager ID from the form
+
+        // Find the manager by ID and update their employer field
+        const manager = await Data.findById(managerId);
+        if (!manager) {
+            return res.status(404).send("Manager not found");
+        }
+
+        // Ensure manager.employer is initialized
+        if (!manager.employer) {
+            manager.employer = [];
+        }
+
+        manager.employer.push({ employee: id });
+        await manager.save();
+        res.redirect(`/add/employee/user/${id}`);
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
+
 
 connectDB().then(() => {
     app.listen(port, () => {

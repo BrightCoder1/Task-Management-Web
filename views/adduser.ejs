@@ -88,7 +88,9 @@ Bootstrap 5 Dashboard Admin Template
                                     <th scope="col">Username</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Position</th>
+                                    <th scope="col">Team</th>
                                     <th scope="col">Add User</th>
+                                    <th scope="col">Remove User</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,10 +99,17 @@ Bootstrap 5 Dashboard Admin Template
                                         <td><%= index + 1 %></td>
                                         <td><%= employee.username %></td>
                                         <td><%= employee.email %></td>
-                                        <td>Employee</td>
+                                        <td><%= employee.isAdmin ? 'Manager' : 'Employee' %></td>
                                         <td>
-                                            <form id="addform" action="/assigne/employee/<%= employee._id %>">
-                                                <select id="select">
+                                            <% if (employeeManagerMap[employee._id]) { %>
+                                                <%= employeeManagerMap[employee._id].join(', ') %>
+                                            <% } else { %>
+                                                None
+                                            <% } %>
+                                        </td>
+                                        <td>
+                                            <form id="addform" action="/assign/employee/<%= employee._id %>" method="POST">
+                                                <select id="select" name="managerId">
                                                     <option value="select">Select Manager</option>
                                                     <% managers.forEach(manager => { %>
                                                         <option value="<%= manager._id %>"><%= manager.username %></option>
@@ -109,10 +118,26 @@ Bootstrap 5 Dashboard Admin Template
                                                 <button id="addsubmit">Submit</button>
                                             </form>
                                         </td>
+                                        <td>
+                                            <% if (employeeManagerMap[employee._id]) { %>
+                                                <form action="/remove/manager/from/team/<%= employee._id %>" method="POST">
+                                                    <select id="select" name="managerId">
+                                                        <% employeeManagerMap[employee._id].forEach(manager => { %>
+                                                            <option value="<%= managers.find(m => m.username === manager)._id %>"><%= manager %></option>
+                                                        <% }); %>
+                                                    </select>
+                                                    <button type="submit" id="addsubmit">Remove</button>
+                                                </form>
+                                            <% } else { %>
+                                                None
+                                            <% } %>
+                                        </td>
+                                        
                                     </tr>
                                 <% }); %>
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
             </div>

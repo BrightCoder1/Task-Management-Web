@@ -92,6 +92,13 @@ const userSchema = new mongoose.Schema({
                 required: true
             }
         }
+    ],
+    employer:[
+        {
+            employee:{
+                type:String
+            }
+        }
     ]
 }, { timestamps: true });
 

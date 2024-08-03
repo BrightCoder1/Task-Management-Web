@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #a3c6ed;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1550px; 
+    background: linear-gradient(to top right, #ffcccb, #add8e6);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease-in-out;
+    margin: 22px 48px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.header {
+    display: flex;
+    background-color: #e63946;
+    padding: 20px;
+    overflow: hidden;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.header div {
+    text-align: center;
+}
+
+.header .approver, .header .manager {
+    font-size: 14px;
+}
+
+.header span {
+    display: block;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.general-details,
+.details {
+    margin-bottom: 15px;
+    display: block;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.info h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 12px;
+}
+
+.details .section {
+    margin-bottom: 20px;
+}
+
+.details h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.details li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.details li:last-child {
+    border-bottom: none;
+}
+
+.back-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 33px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}

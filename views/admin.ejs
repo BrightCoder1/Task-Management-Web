@@ -7,10 +7,13 @@
 
     <meta name="description" content="">
     <meta name="author" content="Tooplate">
-    
+
     <title>Task Management</title>
+
+    <link rel="stylesheet" href="/admin.css">
+
     <link rel="shortcut icon" href="/image/logo.jpeg" type="image/x-icon">
-    
+
     <link rel="stylesheet" href="/css/index.css">
     <!-- CSS FILES -->
     <link rel="preconnect" href="/https://fonts.googleapis.com">
@@ -199,11 +202,11 @@ Bootstrap 5 Dashboard Admin Template
                     <main>
                         <div class="info-boxes">
                             <div class="info-box">
-                                <h3>Total Users</h3>
-                                <p id="totalUserCount">0</p>
+                                <h3>Team Employers</h3>
+                                <p id="employerCounter">0</p>
                             </div>
                             <div class="info-box">
-                                <h3>All Projects</h3>
+                                <h3>Team Projects</h3>
                                 <p id="totalTaskCount">0</p>
                             </div>
                             <div class="info-box">
@@ -216,12 +219,83 @@ Bootstrap 5 Dashboard Admin Template
                             </div>
                         </div>
                     </main>
+
+                    <h2 id="usermanagement">Team Details</h2>
+                    <div class="table-responsive">
+                        <table class="user-table">
+                            <thead>
+                                <tr>
+                                    <th>Serial no.</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Start Date</th>
+                                    <th>Actions</th>
+                                    <th>Profile</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% employees.forEach((employee, index)=> { %>
+                                    <tr>
+                                        <td>
+                                            <%= index + 1 %>
+                                        </td>
+                                        <td>
+                                            <%= employee.username %>
+                                        </td>
+                                        <td>
+                                            <%= employee.email %>
+                                        </td>
+                                        <td>
+                                            <%= employee.isAdmin ? 'Manager' : 'Employee' %>
+                                        </td>
+                                        <td>
+                                            <%= new Date(employee.createdAt).toLocaleDateString() %>
+                                        </td>
+                                        <td>
+                                            <a href="/addtask/<%= employee._id %>" class="assign-task-btn">Assign
+                                                Task</a>
+                                        </td>
+                                        <td><a class="update" href="/viewprofile/<%= employee._id %>">View</a></td>
+
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
             </main>
 
         </div>
     </div>
 
+    <script>
+        // Pass the user ID from EJS to JavaScript
+        const userId = "<%= user._id %>";
+
+        async function fetchEmployerData() {
+            try {
+                // Fetch the count of employers
+                const countResponse = await fetch(`/admin/employerCount/${userId}`);
+                const countData = await countResponse.json();
+                document.getElementById("employerCounter").innerText = countData.count;
+
+                // Fetch the total tasks of employees
+                const taskResponse = await fetch(`/admin/employerTask/${userId}`);
+                const taskData = await taskResponse.json();
+                document.getElementById("totalTaskCount").innerText = taskData.totalTasks;
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        // Call the function to fetch data when the page loads
+        window.onload = fetchEmployerData;
+    </script>
+
+
     <!-- JAVASCRIPT FILES -->
+    <script src="/admin.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="/js/apexcharts.min.js"></script>
